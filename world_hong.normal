@@ -1,0 +1,50 @@
+
+转自知乎上网友ccharles 鸣谢
+
+Sub tian2()
+'
+' tian2 宏
+'
+'作者：ccharles
+
+
+
+percentToCropB = 10
+percentToCropL = 10
+percentToCropR = 10
+percentToCropT = 10
+Dim n '图片个数
+On Error Resume Next '忽略错误
+For n = 1 To ActiveDocument.InlineShapes.Count 'InlineShapes类型图片
+With ActiveDocument.InlineShapes(n).PictureFormat
+origHeight = ActiveDocument.InlineShapes(n).Height
+origWidth = ActiveDocument.InlineShapes(n).Width
+cropPointsB = origHeight * percentToCropB / 35 改变低部的
+cropPointsL = origWidth * percentToCropL / 100
+cropPointsR = origHeight * percentToCropR / 100
+cropPointsT = origWidth * percentToCropT / 35 改变 顶部
+.CropBottom = cropPointsB
+.CropLeft = cropPointsL
+.CropRight = cropPointsR
+.CropTop = cropPointsT
+End With
+Next n
+For n = 1 To ActiveDocument.Shapes.Count 'Shapes类型图片
+With ActiveDocument.Shapes(n).PictureFormat
+origHeight = ActiveDocument.Shapes(n).Height
+origWidth = ActiveDocument.Shapes(n).Width
+cropPointsB = origHeight * percentToCropB / 35
+cropPointsL = origWidth * percentToCropL / 100
+cropPointsR = origHeight * percentToCropR / 100
+cropPointsT = origWidth * percentToCropT / 35
+.CropBottom = cropPointsB
+.CropLeft = cropPointsL
+.CropRight = cropPointsR
+.CropTop = cropPointsT
+End With
+Next n
+
+
+End Sub
+
+
